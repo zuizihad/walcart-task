@@ -2,8 +2,22 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { useCategoriesQuery } from '../services/categories/categories.query';
 
 const Home: NextPage = () => {
+  const { data, error, loading } = useCategoriesQuery();
+  console.log(data)
+  console.log(data?.getCategories?.result?.categories)
+  if (loading) {
+    return (
+      <p>Loading</p>
+    )
+  }
+  if (error) {
+    return (
+      <p>Error</p>
+    )
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -14,12 +28,12 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to <a href="https://nextjs.org">Walcart!</a>
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
+          A sister concern of{' '}
+          <code className={styles.code}>Walton Bangladesh</code>
         </p>
 
         <div className={styles.grid}>
