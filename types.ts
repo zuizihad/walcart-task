@@ -46,6 +46,6 @@ export interface CreateCategoryResponse {
 export interface CreateCategoryVariables {
     category: {
         name: string;
-        parentCategoryUid: number;
+        parentCategoryUid: string;
     }
 }

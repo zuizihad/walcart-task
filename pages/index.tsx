@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useCategoriesQuery } from '../services/categories/categories.query';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   const { data, error, loading } = useCategoriesQuery();
@@ -30,40 +31,23 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Walcart!</a>
         </h1>
+        <Link href="/create">
+          <button className="btn btn-primary">Create</button>
+        </Link>
 
         <p className={styles.description}>
           A sister concern of{' '}
           <code className={styles.code}>Walton Bangladesh</code>
         </p>
-
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          {
+            data && data?.getCategories?.result?.categories.map((category: any, index: number) => (
+              <a key={index} className={styles.card}>
+                {/* <h2>{category.name} &rarr;</h2> */}
+                <p>{category.name}</p>
+              </a>
+            ))
+          }
         </div>
       </main>
 
